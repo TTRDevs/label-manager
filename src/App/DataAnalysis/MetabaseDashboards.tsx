@@ -9,8 +9,8 @@ export default function MetabaseDashboards() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/bandcamp/credentials'); // Adjust the URL as necessary
-                console.log("Data fetched from backend:", response.data); // This logs the data to the browser console
+                const response = await axios.get('http://localhost:3001/api/bandcamp/credentials');
+                console.log("Data fetched from backend:", response.data);
                 setFetchedData(response.data);
                 setIsDataFetched(true);
             } catch (error) {
@@ -24,6 +24,7 @@ export default function MetabaseDashboards() {
     return (
         <div>
             {isDataFetched ? <MetabaseEmbedding /> : <p>Loading data...</p>}
+            {fetchedData}
         </div>
     );
 }
