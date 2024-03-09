@@ -1,0 +1,24 @@
+/* AppStyles.css */
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mainContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .appContentContainer {
+    background-color: rgba(233, 231, 217, 0.864);
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Adds scroll to the content area if content exceeds viewport height */
+  }
+  

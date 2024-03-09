@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import LandingPageCardDisplay from "./LandingPageCardDisplay";
 
 export default function LandingPage() {
     const navigate = useNavigate();
@@ -11,8 +12,7 @@ export default function LandingPage() {
     }
     return (
         <div>
-            <button onClick={navigateToDataAnalysis}>Data Analysis</button>
-            <button onClick={navigateToYouTubeManager}>YouTube Manager</button>
+            <LandingPageCardDisplay/>            
         </div>
     )
 }
