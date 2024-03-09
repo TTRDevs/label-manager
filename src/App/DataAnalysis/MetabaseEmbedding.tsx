@@ -7,7 +7,7 @@ const MetabaseEmbedding = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/metabase')
+        axios.get('http://localhost:3000')
             .then(response => {
                 setIframeUrl(response.data.iframeUrl);
                 setIsDashboardOn(true);

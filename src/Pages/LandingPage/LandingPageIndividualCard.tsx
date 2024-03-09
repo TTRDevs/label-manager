@@ -4,9 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import MetabaseDashboards from '../../App/DataAnalysis/MetabaseDashboards';
-import YouTubeManager from '../../App/YoutubeManager/YouTubeManager';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 interface CardProp {
     name: string;
 }
