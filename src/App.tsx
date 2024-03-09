@@ -8,7 +8,7 @@ export default function App() {
   return (
     <Container disableGutters maxWidth={false} className="mainContainer">
       <NavBar/>
-      <Paper elevation={3} className="appContentContainer" square sx={{minHeight: '100vh', backgroundColor:  "antiquewhite"}}>
+      <Paper elevation={3} className="appContentContainer" square sx={{minHeight: '100vh', backgroundColor:  "white"}}>
         <Outlet />
       </Paper>
     </Container>

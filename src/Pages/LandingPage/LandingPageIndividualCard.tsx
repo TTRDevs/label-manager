@@ -17,28 +17,28 @@ export default function LandingPageIndividualCard({ name }: CardProp) {
     const dataAnalysisTitle = "Data Analysis";
     const videoMakerTitle = "Video Maker";
 
-    const getImage = (name: String) => {
+    const getImage = (name: string) => {
         if (name === 'data-analysis') {
             return dataAnalysisImage
         } else {
             return videoMakerImage
         }
     }
-    const getText = (name: String) => {
+    const getText = (name: string) => {
         if (name === 'data-analysis') {
             return dataAnalysisText
         } else {
             return videoMakerText
         }
     }
-    const getTitle = (name: String) => {
+    const getTitle = (name: string) => {
         if (name === 'data-analysis') {
             return dataAnalysisTitle
         } else {
             return videoMakerTitle
         }
     }
-    const getModule = (name: String) => {
+    const getModule = (name: string) => {
         if (name === 'data-analysis') {
             return navigate('/app/data-analysis')
         } else {

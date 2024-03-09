@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './MetabaseEmbedding.css';
 import axios from 'axios';
 
 const MetabaseEmbedding = () => {
@@ -7,7 +8,7 @@ const MetabaseEmbedding = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000')
+        axios.get('http://localhost:3001/api/metabase')
             .then(response => {
                 setIframeUrl(response.data.iframeUrl);
                 setIsDashboardOn(true);
@@ -16,19 +17,19 @@ const MetabaseEmbedding = () => {
                 console.error('Error fetching Metabase dashboard URL', error);
             });
     }, []);
-
-
     return (
-        <div>
+        <div className="metabase-embedding-container">
             {isDashboardOn ? (
                 <iframe
                     src={iframeUrl}
-                    frameBorder="0"
-                    width="800"
-                    height="600"
+                    width="100%"
+                    height="100%"
+                    allowTransparency
                 ></iframe>
             ) : (
-                <p>Loading dashboard...</p>
+                <>
+                    <p>Loading dashboard...</p>
+                </>
             )}
 
         </div>
