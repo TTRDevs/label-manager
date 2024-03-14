@@ -1,9 +1,6 @@
 import { createContext, useContext } from 'react';
 import { AppContextValue } from './AppContextProvider';
 
-
-
-
 export const AppContext = createContext<AppContextValue | undefined>(undefined);
 
 export const useUserContext = () => {

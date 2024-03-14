@@ -1,26 +1,23 @@
-/* ButtonAppBar.css */
-
 .appBar {
-    background-color: #ec991d; /* Adjust the color to match your theme */
-  }
-  
-  .toolbar {
-    justify-content: space-between;
-  }
-  
-  .title {
-    flex-grow: 1;
-    font-weight: bold;
-  }
-  
-  .loginButton {
-    color: #fff;
-    background-color: #5c6bc0; /* Adjust the button color to match your theme */
-    border-radius: 4px;
-    padding: 6px 16px;
-  }
-  
-  .loginButton:hover {
-    background-color: #3f51b5; /* Slightly darker shade on hover */
-  }
-  
+  background-color: #ec991d;
+}
+
+.toolbar {
+  justify-content: space-between;
+}
+
+.title {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.loginButton {
+  color: #fff;
+  background-color: #5c6bc0;
+  border-radius: 4px;
+  padding: 6px 16px;
+}
+
+.loginButton:hover {
+  background-color: #3f51b5;
+}

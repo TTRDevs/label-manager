@@ -7,7 +7,6 @@ interface AppContextProviderProps {
     children: ReactNode;
 }
 
-// Define a new type for the context that includes both the appContext and setAppContext.
 export interface AppContextValue {
     appContext: AppContextType;
     setAppContext: Dispatch<SetStateAction<AppContextType>>;
@@ -25,7 +24,6 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({ children
     }, [currentContext]);
 
     const handleSetAppContext: Dispatch<SetStateAction<AppContextType>> = (context) => {
-        // Check if context is a function and call it with the previous state if it is
         const value = context instanceof Function ? context(appContext) : context;
         dispatch(updateContext(value));
         setAppContext(value);
@@ -36,5 +34,3 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({ children
         </AppContext.Provider>
     );
 };
-
-// Note: Ensure the updateContext action creator is properly typed to handle AppContextType as an argument.

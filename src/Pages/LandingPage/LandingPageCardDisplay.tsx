@@ -1,16 +1,11 @@
 import LandingPageIndividualCard from "./LandingPageIndividualCard";
-
+import Box from '@mui/material/Box';
 
 export default function LandingPageCardDisplay() {
     return (
-        <div style={{ flexDirection: "row", display: "flex" }}>
-            <div style={{ margin: "30px"}}>
-                <LandingPageIndividualCard name={'data-analysis'}/>
-            </div>
-
-            <div style={{ margin: "30px"}}>
-                <LandingPageIndividualCard name={'video-maker'} />
-            </div>
-        </div>
-    )
+        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4, justifyContent: 'center' }}>
+            <LandingPageIndividualCard name={'data-analysis'} />
+            <LandingPageIndividualCard name={'video-maker'} />
+        </Box>
+    );
 }
