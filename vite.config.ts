@@ -8,10 +8,10 @@ export default defineConfig({
     exclude: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
   },
   server: {
-    headers: {
-      "Cross-Origin-Opener-Policy": "same-origin",
-      "Cross-Origin-Embedder-Policy": "credentialless",
-      "Cross-Origin-Resource-Policy": "cross-origin",
-    },
+    // headers: {
+    //   "Cross-Origin-Opener-Policy": "same-origin",
+    //   "Cross-Origin-Embedder-Policy": "credentialless",
+    //   "Cross-Origin-Resource-Policy": "cross-origin",
+    // },
   },
 });
