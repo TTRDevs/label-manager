@@ -5,14 +5,16 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import dataAnalysisImage from './../../Assets/data-analysis.png'
+import videoMakerImage  from './../../Assets/video-maker.png'
 
 interface CardProp {
     name: string;
 }
 export default function LandingPageIndividualCard({ name }: CardProp) {
     const navigate = useNavigate();
-    const dataAnalysisImage = './../../../public/data-analysis.png'    
-    const videoMakerImage = './../../../public/video-maker.png'
+    
+    
     const dataAnalysisText = "Data Analysis module presents interactive dashboards using Metabase. Allowing users to have a complete view of their data and collect valuable Insights";
     const videoMakerText = "Video Maker module allows for automatic creation of videos via image and song upload. New feature of automatic video uploading coming soon";
     const dataAnalysisTitle = "Data Analysis";
