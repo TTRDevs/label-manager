@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Deployment Branch
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: deployment # Branch where the build directory will be pushed
           FOLDER: dist # Updated to your build directory name
           CLEAN: true # Cleans the deployment branch before pushing the new build
