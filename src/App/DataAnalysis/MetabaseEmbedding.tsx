@@ -25,7 +25,7 @@ const MetabaseEmbedding = () => {
                     src={iframeUrl}
                     width="100%"
                     height="100%"
-                    allowTransparency
+                    // allowTransparency
                 ></iframe>
             ) : (
                 <>
