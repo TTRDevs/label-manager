@@ -5,8 +5,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import dataAnalysisImage from './../../assets/data-analysis.png'
-import videoMakerImage  from './../../assets/video-maker.png'
+import da from './../../assets/da.png'
+import vm from './../../assets/vm.png'
+
+
+const dataAnImage = da
+const videoMkrImage = vm
 
 interface CardProp {
     name: string;
@@ -22,9 +26,9 @@ export default function LandingPageIndividualCard({ name }: CardProp) {
 
     const getImage = (name: string) => {
         if (name === 'data-analysis') {
-            return dataAnalysisImage
+            return dataAnImage
         } else {
-            return videoMakerImage
+            return videoMkrImage
         }
     }
     const getText = (name: string) => {
