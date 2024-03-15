@@ -1,9 +1,9 @@
-import VideoMkrPage from './VideoMaker/VideoMaker/VideoMkrPage'
+
 
 export default function YouTubeManager() {
   return (
     <div>
-      <VideoMkrPage/>
+     <h1>teste youtube manager</h1>
     </div>
   )
 }
