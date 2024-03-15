@@ -1,5 +1,5 @@
 import { useRouteError, Link } from "react-router-dom"
-
+//oi
 export default function Error() {
   const error = useRouteError()
   console.log(error);
