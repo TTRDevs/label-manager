@@ -5,8 +5,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import dataAnalysisImage from './../../Assets/data-analysis.png'
-import videoMakerImage  from './../../Assets/video-maker.png'
+import dataAnalysisImage from './../../assets/data-analysis.png'
+import videoMakerImage  from './../../assets/video-maker.png'
 
 interface CardProp {
     name: string;
