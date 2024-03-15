@@ -9,8 +9,8 @@ const MetabaseEmbedding = () => {
 
     useEffect(() => {
         // axios.get('http://localhost:3001/api/metabase')
-        axios.get('https://metabase.recordlabelmanager.com/api/metabase')
-        .then(response => {
+        axios.get('https://recordlabelmanager.com:3001/api/metabase')
+            .then(response => {
                 setIframeUrl(response.data.iframeUrl);
                 setIsDashboardOn(true);
             })
