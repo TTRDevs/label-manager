@@ -5,14 +5,14 @@ import LandingPage from "../Pages/LandingPage/LandingPage";
 import AppPage from "../Pages/AppPage/AppPage";
 import MetabaseDashboards from "../App/DataAnalysis/MetabaseDashboards";
 import YouTubeManager from "../App/YoutubeManager/YouTubeManager";
-import { useSelector } from 'react-redux';
-import { RootState } from '../Core/Redux/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../Core/Redux/store';
 import LoginPage from "../Pages/LoginPage/LoginPage";
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
-};
+// const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+//   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+//   return isAuthenticated ? children : <Navigate to="/login" replace />;
+// };
 
 export const router = createBrowserRouter([
   {
