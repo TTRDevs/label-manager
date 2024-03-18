@@ -27,7 +27,7 @@ export default function LandingPageIndividualCard({ title }: CardProp) {
     }
 
         return (
-            <Card sx={{ maxWidth: 300, height: '100%', display: 'flex', flexDirection: 'column', opacity: moduleData.available ? 1 : 0.4 }}>
+            <Card sx={{ maxWidth: 300, height: '100%', maxHeight: 300, minWidth: 150, display: 'flex', flexDirection: 'column', opacity: moduleData.available ? 1 : 0.4 }}>
                 <CardActionArea disabled={!moduleData.available} onClick={handleNavigation} sx={{ flex: 1 }}>
                     <CardMedia
                         component="img"
