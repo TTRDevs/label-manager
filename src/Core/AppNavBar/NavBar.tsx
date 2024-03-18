@@ -33,9 +33,9 @@ export default function NavBar() {
           Label Manager
         </Typography>
         {/* Only show the logout asdasd button if the user is authenticated and not on the login page */}
-        {!isLoginPage && isAuthenticated && (
+        {/* {!isLoginPage && isAuthenticated && (
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
-        )}
+        )} */}
       </Toolbar>
     </AppBar>
   );

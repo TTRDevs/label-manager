@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />,
+        element: <Navigate to="/home" replace />,
       },
       {
         path: 'login',
@@ -31,17 +31,17 @@ export const router = createBrowserRouter([
       {
         path: 'home',
         element: (
-          <ProtectedRoute>
+          
             <LandingPage />
-          </ProtectedRoute>
+          
         ),
       },
       {
         path: 'app',
         element: (
-          <ProtectedRoute>
+          
             <AppPage />
-          </ProtectedRoute>
+          
         ),
         errorElement: <Error />,
         children: [
