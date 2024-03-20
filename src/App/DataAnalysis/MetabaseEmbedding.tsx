@@ -15,7 +15,7 @@ const MetabaseEmbedding = () => {
                     setIsDashboardOn(true);
                 })
                 .catch(error => {
-                    console.error('Error fetching Metabase Dashboard URL', error);
+                    console.error('Error fetching Metabase Dashboard URL from Server', error);
                     if (retries > 0) {
                         setTimeout(() => {
                             fetchMetabaseDashboardURL(retries - 1, interval);
