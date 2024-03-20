@@ -12,7 +12,7 @@ export default defineConfig({
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Resource-Policy': 'same-origin', // Changed from 'cross-origin' to 'same-origin'
+      'Cross-Origin-Resource-Policy': 'cross-origin', // Changed from 'cross-origin' to 'same-origin'
     },  
   },
 });
