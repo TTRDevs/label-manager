@@ -6,13 +6,9 @@ import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
 import Loader from "./Loader";
 import 'react-dom/client'
-import { Stepper, Step, StepLabel, Fade, LinearProgress } from '@mui/material';
 import './VideoMaker.css';
-import { StepIconProps } from '@mui/material/StepIcon';
-import StepIcon from '@mui/material/StepIcon';
-import { useAppDispatch } from '../../Core/Redux/hooks'
-import { setVideoUrl } from "../../Core/Redux/videoSlice";
-
+// import { StepIconProps } from '@mui/material/StepIcon';
+// import StepIcon from '@mui/material/StepIcon';
 
 const VideoMakerLogic: React.FC = () => {
 
@@ -34,32 +30,12 @@ const VideoMakerLogic: React.FC = () => {
     const [audioLoaded, setAudioLoaded] = useState<boolean | null>(null);
     const [imageLoaded, setImageLoaded] = useState<boolean | null>(null);
     const [videoNotStarted, setVideoNotStarted] = useState<boolean>(true);
-    const [audioProcessing, setAudioProcessing] = useState<boolean>(false);
-    const [imageProcessing, setImageProcessing] = useState<boolean>(false);
-    const [finalizingVideo, setFinalizingVideo] = useState<boolean>(false);
-    const [videoCreated, setVideoCreated] = useState<boolean>(false);
-    const [showStepper, setShowStepper] = useState<boolean>(true);
-    const [currentProgress, setCurrentProgress] = useState<number>(0);
-    const [totalDuration, setTotalDuration] = useState<number>(0);
-
-    const dispatch = useAppDispatch();
-
-    const steps = ['Process Audio', 'Process Image', 'Finalizing Video'];
-    let activeStep = 0;
-    if (audioProcessing) activeStep = 1;
-    if (imageProcessing) activeStep = 2;
-    if (finalizingVideo) activeStep = 3;
-
-
-    useEffect(() => {
-        if (activeStep === steps.length) {
-            const timer = setTimeout(() => setShowStepper(false), 2000); // Adjust time for fade effect
-            return () => clearTimeout(timer);
-        }
-    }, [activeStep]);
+    // const [audioProcessing, setAudioProcessing] = useState<boolean>(false);
+    // const [imageProcessing, setImageProcessing] = useState<boolean>(false);
+    // const [finalizingVideo, setFinalizingVideo] = useState<boolean>(false);
+    // const [totalDuration, setTotalDuration] = useState<number>(0);
 
     const videoRef = useRef<HTMLVideoElement>(null);
-
 
     // handle functions - inputs
     const handleAudioFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,21 +80,21 @@ const VideoMakerLogic: React.FC = () => {
 
     };
 
-    const ColorlibStepIcon = (props: StepIconProps) => {
-        const { active, completed, className } = props;
+    // const ColorlibStepIcon = (props: StepIconProps) => {
+    //     const { active, completed, className } = props;
 
-        const iconStyles = {
-            color: active || completed ? '#FFA500' : 'grey', // Orange color for active and completed
-        };
+    //     const iconStyles = {
+    //         color: active || completed ? '#FFA500' : 'grey', // Orange color for active and completed
+    //     };
 
-        return (
-            <StepIcon
-                {...props}
-                className={className}
-                sx={iconStyles} // Apply styles using sx prop
-            />
-        );
-    };
+    //     return (
+    //         <StepIcon
+    //             {...props}
+    //             className={className}
+    //             sx={iconStyles} // Apply styles using sx prop
+    //         />
+    //     );
+    // };
 
     // load ffmpeg
     const load = async () => {
@@ -173,7 +149,7 @@ const VideoMakerLogic: React.FC = () => {
             const minutes = parseInt(match[2], 10);
             const seconds = parseFloat(match[3]);
             const duration = hours * 3600 + minutes * 60 + seconds;
-            setTotalDuration(duration);
+            // setTotalDuration(duration);
             return duration;
         } catch (error) {
             console.error("Error getting metadata for file:", file, error); // Detailed error log
@@ -189,7 +165,7 @@ const VideoMakerLogic: React.FC = () => {
 
         const ffmpeg = ffmpegRef.current;
         if (audioFile) {
-            setAudioProcessing(true);
+            // setAudioProcessing(true);
             await ffmpeg.writeFile("inputAd.wav", await fetchFile(audioFile));
 
         }
@@ -208,11 +184,11 @@ const VideoMakerLogic: React.FC = () => {
             '-b:a', '192k',
             'audioAac.aac'
         ]);
-        setCurrentProgress((1 / 3) * totalDuration); // One third progress after audio
-        setAudioProcessing(false);
+        // setCurrentProgress((1 / 3) * totalDuration); // One third progress after audio
+        // setAudioProcessing(false);
 
         if (imageFile) {
-            setImageProcessing(true)
+            // setImageProcessing(true)
             await ffmpeg.writeFile("inputImg.png", await fetchFile(imageFile));
 
         }
@@ -226,9 +202,9 @@ const VideoMakerLogic: React.FC = () => {
             '-vf', 'scale=1920x1080',
             'imageVideo.mp4'
         ]);
-        setCurrentProgress((2 / 3) * totalDuration); // Two thirds progress after image
-        setImageProcessing(false);
-        setFinalizingVideo(true);
+        // setCurrentProgress((2 / 3) * totalDuration); // Two thirds progress after image
+        // setImageProcessing(false);
+        // setFinalizingVideo(true);
 
 
         await ffmpeg.exec([
@@ -241,7 +217,7 @@ const VideoMakerLogic: React.FC = () => {
         ]);
 
         const fileData = await ffmpeg.readFile('outputVideo.mp4');
-        await setFinalizingVideo(true)
+        // await setFinalizingVideo(true)
         let data;
         if (typeof fileData === 'string') {
             data = Uint8Array.from(atob(fileData), c => c.charCodeAt(0));

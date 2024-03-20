@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { orange } from '@mui/material/colors';
 
-const ColorButton = styled(Button)(({ theme }) => ({
+const ColorButton = styled(Button)(() => ({
    flexDirection: 'column',
    color: "white",
    backgroundColor: orange[300],

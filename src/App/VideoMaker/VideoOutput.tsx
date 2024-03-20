@@ -3,8 +3,6 @@ import "./VideoOutput.css";
 import { Button } from '@mui/material';
 import { orange } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import { useAppSelector } from '../../Core/Redux/hooks';
-import { useState } from 'react';
 
 
 
@@ -14,7 +12,7 @@ interface VideoOutputProps {
     clickFunc2: () => void;
 }
 
-const ColorButton = styled(Button)(({ theme }) => ({
+const ColorButton = styled(Button)(() => ({
     flexDirection: 'column',
     color: "white",
     backgroundColor: orange[300],
