@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './MetabaseEmbedding.css';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ const MetabaseEmbedding = () => {
     const [isDashboardOn, setIsDashboardOn] = useState(false);
 
     // Function to attempt the fetch with retries
-    const fetchMetabaseDashboardURL = (retries = 3, interval = 3000) => {
+    const fetchMetabaseDashboardURL = useCallback((retries = 3, interval = 3000) => {
         const makeRequest = () => {
             axios.get('https://server.recordlabelmanager.com/api/metabase')
                 .then(response => {
@@ -24,11 +24,11 @@ const MetabaseEmbedding = () => {
                 });
         };
         makeRequest();
-    };
+    }, []); // Dependencies array is empty, meaning this function is created once per component instance
 
     useEffect(() => {
         fetchMetabaseDashboardURL(); // Call the function with retries
-    }, []);
+    }, [fetchMetabaseDashboardURL]); // Now fetchMetabaseDashboardURL is listed as a dependency
 
     return (
         <div className="metabase-embedding-container">
@@ -48,7 +48,6 @@ const MetabaseEmbedding = () => {
 };
 
 export default MetabaseEmbedding;
-
 
 // import { useState, useEffect } from 'react';
 // import './MetabaseEmbedding.css';

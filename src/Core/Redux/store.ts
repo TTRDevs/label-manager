@@ -3,11 +3,18 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit'; // Use combineReducers from @reduxjs/toolkit
 import authSlice from '../Auth/authSlice';
+import videoSlice from './videoSlice';
+
+// Inside your store.ts
+
 
 
 const rootReducer = combineReducers({
-    auth: authSlice
+  auth: authSlice,
+  video: videoSlice, // Add the video slice reducer here
 });
+
+// The rest of your store setup remains the same
 
 
 const persistConfig = {

@@ -22,7 +22,7 @@ export default function NavBar() {
   // const isLoginPage = location.pathname === '/login';
 
   return (
-    <AppBar position="static" sx={{ width: "100%", backgroundColor: "#ec991d" }}>
+    <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#ec991d" }}>
       <Toolbar>
         <Typography
           variant="h6"

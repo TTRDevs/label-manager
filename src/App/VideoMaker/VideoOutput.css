@@ -1,0 +1,14 @@
+.VideoOutput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.Player {
+    max-width: 800px; /* A fixed width, or you can use a percentage */
+    max-height: 450px; /* Adjust based on the aspect ratio of your videos */
+    width: 100%; /* Ensures the video is responsive and maintains size constraints */
+    height: auto; /* Maintains aspect ratio */
+}
