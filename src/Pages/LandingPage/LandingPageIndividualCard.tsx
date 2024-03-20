@@ -1,4 +1,3 @@
-// LandingPageIndividualCard.tsx
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -33,7 +32,7 @@ export default function LandingPageIndividualCard({ title }: CardProp) {
                         component="img"
                         image={moduleData.image}
                         alt={moduleData.title}
-                        sx={{ height: 140 }} // Adjusted to control image height
+                        sx={{ height: 140 }}
                     />
                     <CardContent sx={{ flexGrow: 1, height: '100%' }}>
                         <Typography gutterBottom variant="h5" component="div">

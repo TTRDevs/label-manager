@@ -13,7 +13,7 @@ const MetabaseEmbedding = () => {
                 setIsDashboardOn(true);
             })
             .catch(error => {
-                console.error('Error fetching Metabase dashboard URL', error);
+                console.error('Error fetching Metabase Dashboard URL', error);
             });
     }, []);
     return (
