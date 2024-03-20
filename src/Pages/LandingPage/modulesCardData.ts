@@ -32,7 +32,7 @@ const moduleCardData: ModuleCardData = {
         text: 'Video Maker module allows for creation and uploading of videos to YouTube, all it takes is an image and an audio file',
         image: videoMakerImage,
         path: '/app/video-maker',
-        available: true
+        available: false
     },
     'releases': {
         title: 'Releases',
