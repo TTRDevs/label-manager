@@ -97,6 +97,20 @@ const VideoMakerLogic: React.FC = () => {
     // };
 
     // load ffmpeg
+    // const load = async () => {
+    //     const ffmpeg = ffmpegRef.current;
+    //     ffmpeg.on('log', ({ message }) => {
+    //         if (messageRef.current) {
+    //             messageRef.current.innerHTML = message;
+    //         }
+    //     });
+    //     await ffmpeg.load({
+    //         coreURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.js', "text/javascript"),
+    //         wasmURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.wasm', "application/wasm"),
+    //         workerURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.worker.js', "text/javascript"),
+    //     });
+    //     setLoaded(true);
+    // };
     const load = async () => {
         const ffmpeg = ffmpegRef.current;
         ffmpeg.on('log', ({ message }) => {
@@ -104,13 +118,24 @@ const VideoMakerLogic: React.FC = () => {
                 messageRef.current.innerHTML = message;
             }
         });
-        await ffmpeg.load({
-            coreURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.4/dist/esm/ffmpeg-core.js', "text/javascript"),
-            wasmURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.4/dist/esm/ffmpeg-core.wasm', "application/wasm"),
-            workerURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.4/dist/esm/ffmpeg-core.worker.js', "text/javascript"),
-        });
-        setLoaded(true);
+
+        try {
+            const coreURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.min.js', "text/javascript"); // https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js
+            const wasmURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm', "application/wasm");
+            const workerURL = await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.worker.js', "text/javascript");
+
+            await ffmpeg.load({ coreURL, wasmURL, workerURL });
+            setLoaded(true);
+        } catch (error) {
+            console.error("An error occurred while loading FFmpeg", error);
+            // Handle the error appropriately here, like updating the UI to show an error message
+            if (messageRef.current) {
+                messageRef.current.innerHTML = 'An error occurred while loading FFmpeg: ' + error.message;
+            }
+        }
     };
+
+
 
     // data reading functions
     const getMetadata = async (file: string) => {
