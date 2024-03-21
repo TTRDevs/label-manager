@@ -96,21 +96,6 @@ const VideoMakerLogic: React.FC = () => {
     //     );
     // };
 
-    // load ffmpeg
-    // const load = async () => {
-    //     const ffmpeg = ffmpegRef.current;
-    //     ffmpeg.on('log', ({ message }) => {
-    //         if (messageRef.current) {
-    //             messageRef.current.innerHTML = message;
-    //         }
-    //     });
-    //     await ffmpeg.load({
-    //         coreURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.js', "text/javascript"),
-    //         wasmURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.wasm', "application/wasm"),
-    //         workerURL: await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.worker.js', "text/javascript"),
-    //     });
-    //     setLoaded(true);
-    // };
     const load = async () => {
         const ffmpeg = ffmpegRef.current;
         ffmpeg.on('log', ({ message }) => {
