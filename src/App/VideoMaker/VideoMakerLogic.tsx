@@ -127,10 +127,10 @@ const VideoMakerLogic: React.FC = () => {
             await ffmpeg.load({ coreURL, wasmURL, workerURL });
             setLoaded(true);
         } catch (error) {
-            console.error("An error occurred while loading FFmpeg", error);
-            // Handle the error appropriately here, like updating the UI to show an error message
+            const message = (error as Error).message || "An unknown error occurred";
+            console.error("An error occurred while loading FFmpeg", message);
             if (messageRef.current) {
-                messageRef.current.innerHTML = 'An error occurred while loading FFmpeg: ' + error.message;
+            messageRef.current.innerHTML = 'An error occurred while loading FFmpeg: ' + message;
             }
         }
     };
