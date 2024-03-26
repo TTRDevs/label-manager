@@ -1,6 +1,6 @@
 .metabase-embedding-container {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 64px);
     padding: 0;
     margin: 0;
     border: none;
