@@ -3,7 +3,7 @@ import './MetabaseEmbedding.css';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
 import { setIframeUrl, setIsDashboardOn } from './../../Core/Redux/metabaseSlice';
-import Loader from "./../../Core/Utilities/Loader"
+import LinearLoader from './../../Core/Utilities/LinearLoader'
 
 const MetabaseEmbedding = () => {
     const dispatch = useAppDispatch();
@@ -46,7 +46,7 @@ const MetabaseEmbedding = () => {
                     allowTransparency
                 ></iframe>
             ) : (
-                <Loader />
+                <LinearLoader />
             )}
         </div>
     );

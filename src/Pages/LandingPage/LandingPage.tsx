@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '../../Core/Redux/hooks'; // Adjust the import path as needed
 import { setLoading } from '../../Core/Redux/pageSlice'; // Adjust the import path as needed
 import LandingPageCardDisplay from "./LandingPageCardDisplay";
-import Loader from "./../../Core/Utilities/Loader"
+import LinearLoader from "./../../Core/Utilities/LinearLoader";
 
 export default function LandingPage() {
     const isLoading = useAppSelector((state) => state.page.isLoading);
@@ -26,7 +26,7 @@ export default function LandingPage() {
             justifyContent: 'center',
             height: '100vh',
         }}>
-            {isLoading ? <Loader /> : <LandingPageCardDisplay />}
+            {isLoading ? <LinearLoader /> : <LandingPageCardDisplay />}
         </div>
     );
 }

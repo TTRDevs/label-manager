@@ -13,7 +13,7 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import VideoOutput from "./VideoOutput";
 import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
-import Loader from "../../Core/Utilities/Loader";
+import CircularLoader from "../../Core/Utilities/CircularLoader";
 import './VideoMaker.css';
 
 
@@ -209,7 +209,7 @@ const VideoMakerLogic: React.FC = () => {
 
     return loaded && (
         <div className="VideoMkr">
-            {videoLoading && <Loader />}
+            {videoLoading && <CircularLoader />}
             {videoNotStarted ? (
                 <div className="settings">
                     <div style={{ display: 'flex', gap: '80px', alignItems: 'center', justifyContent: 'center' }}>
