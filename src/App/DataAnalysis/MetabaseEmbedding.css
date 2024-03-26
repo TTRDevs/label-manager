@@ -1,7 +1,8 @@
 .metabase-embedding-container {
     width: 100vw;
-    height: calc(100vh - 80px);
+    height: 100vh;
     padding: 0;
     margin: 0;
-    border: 3px solid red;
+    margin-top: 64px;
+    border: none;
 }
