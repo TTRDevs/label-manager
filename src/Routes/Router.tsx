@@ -5,7 +5,7 @@ import LandingPage from "../Pages/LandingPage/LandingPage";
 import AppPage from "../Pages/AppPage/AppPage";
 import MetabaseDashboards from "../App/DataAnalysis/MetabaseDashboards";
 import VideoMakerHome from "../App/VideoMaker/VideoMakerHome";
-import LoginPage from "../Pages/LoginPage/LoginPage";
+// import LoginPage from "../Pages/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,10 +17,10 @@ export const router = createBrowserRouter([
         index: true,
         element: <Navigate to="/home" replace />,
       },
-      {
-        path: 'login',
-        element: <LoginPage />,
-      },
+      // {
+      //   path: 'login',
+      //   element: <LoginPage />,
+      // },
       {
         path: 'home',
         element: (

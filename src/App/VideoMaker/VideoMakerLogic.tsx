@@ -1,54 +1,75 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
+import {
+    setLoaded,
+    setAudioFile,
+    setImageFile,
+    setVideoLoading,
+    resetVideoCreationState,
+    setVideoNotStarted
+} from './../../Core/Redux/videoSlice';
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import VideoOutput from "./VideoOutput";
 import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
 import Loader from "../../Core/Utilities/Loader";
-import 'react-dom/client'
 import './VideoMaker.css';
-// import { StepIconProps } from '@mui/material/StepIcon';
-// import StepIcon from '@mui/material/StepIcon';
+
 
 const VideoMakerLogic: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const {
+        loaded,
+        audioFile,
+        imageFile,
+        videoLoading,
+        audioLoaded,
+        imageLoaded,
+        videoNotStarted,
+    } = useAppSelector((state) => state.video);
 
-    useEffect(() => {
-        load()
-    }, [])
-
-    // ffmpeg
-    const [loaded, setLoaded] = useState<boolean>(false);
     const ffmpegRef = useRef<FFmpeg>(new FFmpeg());
     const messageRef = useRef<HTMLParagraphElement>(null);
-
-    // state - files
-    const [audioFile, setAudioFile] = useState<File | null>(null);
-    const [imageFile, setImageFile] = useState<File | null>(null);
-
-    //state - loading
-    const [videoLoading, setVideoLoading] = useState<boolean | null>(null);
-    const [audioLoaded, setAudioLoaded] = useState<boolean | null>(null);
-    const [imageLoaded, setImageLoaded] = useState<boolean | null>(null);
-    const [videoNotStarted, setVideoNotStarted] = useState<boolean>(true);
-    // const [audioProcessing, setAudioProcessing] = useState<boolean>(false);
-    // const [imageProcessing, setImageProcessing] = useState<boolean>(false);
-    // const [finalizingVideo, setFinalizingVideo] = useState<boolean>(false);
-    // const [totalDuration, setTotalDuration] = useState<number>(0);
-
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    // handle functions - inputs
+    useEffect(() => {
+        load();
+    }, []);
+
+    const load = async () => {
+        const ffmpeg = ffmpegRef.current;
+        ffmpeg.on('log', ({ message }) => {
+            if (messageRef.current) {
+                messageRef.current.innerHTML = message;
+            }
+        });
+
+        try {
+            const coreURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.min.js', "text/javascript");
+            const wasmURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm', "application/wasm");
+            const workerURL = await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.worker.js', "text/javascript");
+
+            await ffmpeg.load({ coreURL, wasmURL, workerURL });
+            dispatch(setLoaded(true));
+        } catch (error) {
+            const message = (error as Error).message || "An unknown error occurred";
+            console.error("An error occurred while loading FFmpeg", message);
+            if (messageRef.current) {
+                messageRef.current.innerHTML = 'An error occurred while loading FFmpeg: ' + message;
+            }
+        }
+    };
+
     const handleAudioFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setAudioFile(e.target.files[0]);
-            setAudioLoaded(true);
+            dispatch(setAudioFile(e.target.files[0]));
         }
     };
 
     const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setImageFile(e.target.files[0]);
-            setImageLoaded(true);
+            dispatch(setImageFile(e.target.files[0]));
         }
     };
 
@@ -61,66 +82,18 @@ const VideoMakerLogic: React.FC = () => {
             a.click();
             document.body.removeChild(a);
         } else {
-            alert('There was an unexpected error - there is no video data available')
+            alert('There was an unexpected error - there is no video data available');
         }
     };
 
     const handleCreateAnother = () => {
-        setAudioFile(null);
-        setImageFile(null);
-        setAudioLoaded(null);
-        setImageLoaded(null);
-        setVideoNotStarted(true);
-        setVideoLoading(null);
+        dispatch(resetVideoCreationState());
 
         if (videoRef.current && videoRef.current.src) {
             URL.revokeObjectURL(videoRef.current.src);
             videoRef.current.src = "";
         }
-
     };
-
-    // const ColorlibStepIcon = (props: StepIconProps) => {
-    //     const { active, completed, className } = props;
-
-    //     const iconStyles = {
-    //         color: active || completed ? '#FFA500' : 'grey', // Orange color for active and completed
-    //     };
-
-    //     return (
-    //         <StepIcon
-    //             {...props}
-    //             className={className}
-    //             sx={iconStyles} // Apply styles using sx prop
-    //         />
-    //     );
-    // };
-
-    const load = async () => {
-        const ffmpeg = ffmpegRef.current;
-        ffmpeg.on('log', ({ message }) => {
-            if (messageRef.current) {
-                messageRef.current.innerHTML = message;
-            }
-        });
-
-        try {
-            const coreURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.min.js', "text/javascript"); // https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.js
-            const wasmURL = await toBlobURL('https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/esm/ffmpeg-core.wasm', "application/wasm");
-            const workerURL = await toBlobURL('https://unpkg.com/@ffmpeg/core-mt@0.12.3/dist/esm/ffmpeg-core.worker.js', "text/javascript");
-
-            await ffmpeg.load({ coreURL, wasmURL, workerURL });
-            setLoaded(true);
-        } catch (error) {
-            const message = (error as Error).message || "An unknown error occurred";
-            console.error("An error occurred while loading FFmpeg", message);
-            if (messageRef.current) {
-            messageRef.current.innerHTML = 'An error occurred while loading FFmpeg: ' + message;
-            }
-        }
-    };
-
-
 
     // data reading functions
     const getMetadata = async (file: string) => {
@@ -169,24 +142,22 @@ const VideoMakerLogic: React.FC = () => {
 
     //exec ffmpeg 
     const createVideo = async () => {
-
-        setVideoNotStarted(false);
-        setVideoLoading(true);
+        dispatch(setVideoNotStarted(false));
+        dispatch(setVideoLoading(true));
 
         const ffmpeg = ffmpegRef.current;
-        if (audioFile) {
-            // setAudioProcessing(true);
-            await ffmpeg.writeFile("inputAd.wav", await fetchFile(audioFile));
 
+        if (audioFile) {
+            await ffmpeg.writeFile("inputAd.wav", await fetchFile(audioFile));
         }
 
-        await ffmpeg.exec(["-i", "inputAd.wav"])
+        await ffmpeg.exec(["-i", "inputAd.wav"]);
         ffmpeg.on("log", ({ message }) => {
-            console.log(message)
+            console.log(message);
         });
         const audioDuration = await getDuration("inputAd.wav") || 0;
 
-        console.log(audioDuration)
+        console.log(audioDuration);
 
         await ffmpeg.exec([
             '-i', 'inputAd.wav',
@@ -194,13 +165,9 @@ const VideoMakerLogic: React.FC = () => {
             '-b:a', '192k',
             'audioAac.aac'
         ]);
-        // setCurrentProgress((1 / 3) * totalDuration); // One third progress after audio
-        // setAudioProcessing(false);
 
         if (imageFile) {
-            // setImageProcessing(true)
             await ffmpeg.writeFile("inputImg.png", await fetchFile(imageFile));
-
         }
 
         await ffmpeg.exec([
@@ -212,10 +179,6 @@ const VideoMakerLogic: React.FC = () => {
             '-vf', 'scale=1920x1080',
             'imageVideo.mp4'
         ]);
-        // setCurrentProgress((2 / 3) * totalDuration); // Two thirds progress after image
-        // setImageProcessing(false);
-        // setFinalizingVideo(true);
-
 
         await ffmpeg.exec([
             '-i', 'imageVideo.mp4',
@@ -227,7 +190,6 @@ const VideoMakerLogic: React.FC = () => {
         ]);
 
         const fileData = await ffmpeg.readFile('outputVideo.mp4');
-        // await setFinalizingVideo(true)
         let data;
         if (typeof fileData === 'string') {
             data = Uint8Array.from(atob(fileData), c => c.charCodeAt(0));
@@ -236,15 +198,15 @@ const VideoMakerLogic: React.FC = () => {
         }
 
         if (videoRef.current && data) {
-            const videoBlob = URL.createObjectURL(
-                new Blob([data], { type: 'video/mp4' })
-            );
-            videoRef.current.src = videoBlob
+            const videoBlob = URL.createObjectURL(new Blob([data], { type: 'video/mp4' }));
+            videoRef.current.src = videoBlob;
         } else {
-            console.log("Could not create blob from mp4 data")
+            console.log("Could not create blob from mp4 data");
         }
-        setVideoLoading(false);
-    }
+
+        dispatch(setVideoLoading(false));
+    };
+
     return loaded && (
         <div className="VideoMkr">
             {videoLoading && <Loader />}

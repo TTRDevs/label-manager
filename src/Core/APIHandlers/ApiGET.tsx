@@ -1,27 +1,28 @@
-import { useState } from "react";
-import axios from "axios";
+// APIGet.tsx
+import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks'
+import { fetchData } from './../../Core/Redux/apiDataSlice'
 
 type Source = {
-    url: string
+    url: string;
 }
 
 const ApiGET = ({ url }: Source) => {
-    const [data, setData] = useState('');
-    const source = url
-    const fetchData = () => {
-        axios.get(source)
-            .then(response => {
-                console.log(response.data);
-                setData(response.data); 
-            })
-            .catch(error => {
-                console.error('Error fetching data from service', error);
-            });
+    const dispatch = useAppDispatch();
+    const { data, status } = useAppSelector((state) => state.apiData);
+
+    const handleFetchData = () => {
+        dispatch(fetchData(url));
     };
+
     return (
         <div>
-            <button onClick={fetchData}>Fetch Data</button>
-            <div>{data ? <h2>data fetched!</h2> : <p>No data fetched yet</p>}</div> 
+            <button onClick={handleFetchData}>Fetch Data</button>
+            <div>
+                {status === 'loading' && <p>Loading...</p>}
+                {status === 'succeeded' && <h2>Data fetched!</h2>}
+                {status === 'failed' && <p>Error fetching data</p>}
+                {status === 'idle' && <p>No data fetched yet</p>}
+            </div> 
         </div>
     );
 };
