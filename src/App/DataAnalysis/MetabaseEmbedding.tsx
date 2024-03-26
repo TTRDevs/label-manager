@@ -4,11 +4,26 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
 import { setIframeUrl, setIsDashboardOn } from './../../Core/Redux/metabaseSlice';
 import Loader from "./../../Core/Utilities/Loader"
+import { setLoading } from '../../Core/Redux/pageSlice'
 
 const MetabaseEmbedding = () => {
     const dispatch = useAppDispatch();
     const iframeUrl = useAppSelector((state) => state.metabase.iframeUrl);
     const isDashboardOn = useAppSelector((state) => state.metabase.isDashboardOn);
+    const isLoading = useAppSelector((state) => state.page.isLoading);
+    
+    useEffect(() => {
+        // Assume MetabaseEmbedding fetches some data or has some initialization that takes time
+        dispatch(setLoading(true)); // Assume loading starts
+
+        // Simulate an asynchronous operation like fetching embedding data
+        const simulateDataLoading = async () => {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulated delay
+            dispatch(setLoading(false)); // Assume loading ends after data is fetched or initial setup is done
+        };
+
+        simulateDataLoading();
+    }, [dispatch]);
 
     const fetchMetabaseDashboardURL = useCallback((retries = 3, interval = 3000) => {
         dispatch(setIsDashboardOn(false)); // Ensure loading state is active before fetching
