@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 
-
 type Source = {
     url: string
 }
+
 const ApiGET = ({ url }: Source) => {
     const [data, setData] = useState('');
     const source = url

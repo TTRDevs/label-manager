@@ -1,18 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
+// MetabaseEmbedding.tsx
+import { useEffect, useCallback } from 'react';
 import './MetabaseEmbedding.css';
 import axios from 'axios';
+import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
+import { setIframeUrl, setIsDashboardOn } from './../../Core/Redux/metabaseSlice';
 
 const MetabaseEmbedding = () => {
-    const [iframeUrl, setIframeUrl] = useState('');
-    const [isDashboardOn, setIsDashboardOn] = useState(false);
+    const dispatch = useAppDispatch();
+    const iframeUrl = useAppSelector((state) => state.metabase.iframeUrl);
+    const isDashboardOn = useAppSelector((state) => state.metabase.isDashboardOn);
 
-    // Function to attempt the fetch with retries
     const fetchMetabaseDashboardURL = useCallback((retries = 3, interval = 3000) => {
         const makeRequest = () => {
             axios.get('https://server.recordlabelmanager.com/api/metabase')
                 .then(response => {
-                    setIframeUrl(response.data.iframeUrl);
-                    setIsDashboardOn(true);
+                    dispatch(setIframeUrl(response.data.iframeUrl));
+                    dispatch(setIsDashboardOn(true));
                 })
                 .catch(error => {
                     console.error('Error fetching Metabase Dashboard URL from Server', error);
@@ -24,11 +27,11 @@ const MetabaseEmbedding = () => {
                 });
         };
         makeRequest();
-    }, []); // Dependencies array is empty, meaning this function is created once per component instance
+    }, [dispatch]);
 
     useEffect(() => {
-        fetchMetabaseDashboardURL(); // Call the function with retries
-    }, [fetchMetabaseDashboardURL]); // Now fetchMetabaseDashboardURL is listed as a dependency
+        fetchMetabaseDashboardURL(); 
+    }, [fetchMetabaseDashboardURL]);
 
     return (
         <div className="metabase-embedding-container">
@@ -48,41 +51,3 @@ const MetabaseEmbedding = () => {
 };
 
 export default MetabaseEmbedding;
-
-// import { useState, useEffect } from 'react';
-// import './MetabaseEmbedding.css';
-// import axios from 'axios';
-
-// const MetabaseEmbedding = () => {
-//     const [iframeUrl, setIframeUrl] = useState('');
-//     const [isDashboardOn, setIsDashboardOn] = useState(false);
-
-//     useEffect(() => {
-//         axios.get('https://server.recordlabelmanager.com/api/metabase')
-//             .then(response => {
-//                 setIframeUrl(response.data.iframeUrl);
-//                 setIsDashboardOn(true);
-//             })
-//             .catch(error => {
-//                 console.error('Error fetching Metabase Dashboard URL', error);
-//             });
-//     }, []);
-//     return (
-//         <div className="metabase-embedding-container">
-//             {isDashboardOn ? (
-//                 <iframe
-//                     src={iframeUrl}
-//                     width="100%"
-//                     height="100%"
-//                 ></iframe>
-//             ) : (
-//                 <>
-//                     <p>Loading dashboard...</p>
-//                 </>
-//             )}
-
-//         </div>
-//     );
-// };
-
-// export default MetabaseEmbedding;

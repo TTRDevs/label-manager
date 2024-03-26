@@ -1,7 +1,7 @@
 import React, { ReactNode, createContext, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppContextType } from '../../Types/appContext';
-import { updateContext, selectCurrentAppContext } from '../Auth/authSlice';
+import { updateContext, selectCurrentAppContext } from '../Redux/authSlice';
 
 interface AppContextProviderProps {
     children: ReactNode;

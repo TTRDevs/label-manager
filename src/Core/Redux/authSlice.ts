@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppContextType } from '../../Types/appContext';
-import { RootState } from '../Redux/store';
+import { RootState } from './store';
 
 type AuthState = {
     loading: boolean;

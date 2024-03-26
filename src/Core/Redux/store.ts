@@ -2,27 +2,21 @@ import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit'; // Use combineReducers from @reduxjs/toolkit
-import authSlice from '../Auth/authSlice';
+import authSlice from './authSlice';
 import videoSlice from './videoSlice';
-
-// Inside your store.ts
-
-
+import metabaseSlice from './metabaseSlice';
 
 const rootReducer = combineReducers({
   auth: authSlice,
-  video: videoSlice, // Add the video slice reducer here
+  video: videoSlice, 
+  metabase: metabaseSlice
 });
-
-// The rest of your store setup remains the same
-
 
 const persistConfig = {
     key: 'root',
     storage,
     whitelist: ['auth'], 
-};
-
+}
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 

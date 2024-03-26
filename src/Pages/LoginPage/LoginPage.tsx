@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../Core/Auth/authSlice';
+import { login } from '../../Core/Redux/authSlice';
 import { Container, Paper, TextField, Button, Typography, Box } from '@mui/material';
 
 export default function LoginPage() {

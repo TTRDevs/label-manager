@@ -4,7 +4,7 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import VideoOutput from "./VideoOutput";
 import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
-import Loader from "./Loader";
+import Loader from "../../Core/Utilities/Loader";
 import 'react-dom/client'
 import './VideoMaker.css';
 // import { StepIconProps } from '@mui/material/StepIcon';
