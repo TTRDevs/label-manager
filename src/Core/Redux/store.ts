@@ -5,13 +5,12 @@ import { combineReducers } from '@reduxjs/toolkit'; // Use combineReducers from 
 import authSlice from './authSlice';
 import videoSlice from './videoSlice';
 import metabaseSlice from './metabaseSlice';
-import apiDataSlice from './apiDataSlice';
+
 
 const rootReducer = combineReducers({
   auth: authSlice,
   video: videoSlice, 
   metabase: metabaseSlice,
-  apiData: apiDataSlice
 });
 
 const persistConfig = {
