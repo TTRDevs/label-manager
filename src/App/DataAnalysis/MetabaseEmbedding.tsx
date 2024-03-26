@@ -60,7 +60,7 @@ const MetabaseEmbedding = () => {
                 <>
                     <LinearLoader />
                     <div style={{ marginTop: '40px' }}> {/* Added div for spacing */}
-                        <p style={{ color: "black", backgroundColor: "white", fontSize: "2em", padding: "10px", borderRadius: "100px" }}>Loading Metabase</p>
+                        <p style={{ color: "darkgrey", backgroundColor: "white", fontSize: "1.5em", padding: "10px", borderRadius: "100px" }}>Loading Metabase</p>
                     </div>
                 </>
             )}
