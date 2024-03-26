@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './MetabaseEmbedding.css';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
@@ -9,20 +9,20 @@ const MetabaseEmbedding = () => {
     const dispatch = useAppDispatch();
     const iframeUrl = useAppSelector((state) => state.metabase.iframeUrl);
     const isDashboardOn = useAppSelector((state) => state.metabase.isDashboardOn);
-    
+    const [minimumLoadingPassed, setMinimumLoadingPassed] = useState(false);
 
     const fetchMetabaseDashboardURL = useCallback((retries = 3, interval = 3000) => {
         dispatch(setIsDashboardOn(false));
-
- 
+        setMinimumLoadingPassed(false);
+        setTimeout(() => setMinimumLoadingPassed(true), 3000);
 
         const makeRequest = () => {
             axios.get('https://server.recordlabelmanager.com/api/metabase')
                 .then(response => {
                     dispatch(setIframeUrl(response.data.iframeUrl));
-                                    
+                  
                         dispatch(setIsDashboardOn(true));
-                                                    
+                  
                 })
                 .catch(error => {
                     console.error('Error fetching Metabase Dashboard URL from Server', error);
@@ -34,9 +34,13 @@ const MetabaseEmbedding = () => {
                 });
         };
         makeRequest();
-    }, [dispatch]);
+    }, [dispatch, minimumLoadingPassed]);
 
-
+    useEffect(() => {
+        if (iframeUrl && minimumLoadingPassed) {
+            dispatch(setIsDashboardOn(true));
+        }
+    }, [iframeUrl, minimumLoadingPassed, dispatch]);
 
     useEffect(() => {
         fetchMetabaseDashboardURL();
