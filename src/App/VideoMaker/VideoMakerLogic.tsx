@@ -218,13 +218,15 @@ const VideoMakerLogic: React.FC = () => {
                     {/* Accordion for Audio File Upload */}
                     <Accordion sx={{ backgroundColor: 'rgb(112 154 189)', marginBottom: "20px" }}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon style={{color: "white"}}/>}
+                            expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <p style={{color: "white", marginLeft: "10px"}}>Upload your audio file</p>
+                            <p style={{ color: "white", marginLeft: "10px" }}>
+                                {audioLoaded ? "Audio file uploaded successfully" : "Upload your audio file"}
+                            </p>
                         </AccordionSummary>
-                        <AccordionDetails style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                        <AccordionDetails style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <InputFileUpload
                                 handleFunc={handleAudioFile}
                                 media={'audio'}
@@ -238,15 +240,18 @@ const VideoMakerLogic: React.FC = () => {
                         </AccordionDetails>
                     </Accordion>
 
+                    {/* Accordion for Image File Upload */}
                     <Accordion sx={{ backgroundColor: 'rgb(112 154 189)', marginBottom: "20px" }}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon style={{color: "white"}}/>}
+                            expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <p style={{fontFamily: "HelveticaNeue", color: "white", marginLeft: "10px"}}>Upload your background image</p>
+                            <p style={{ fontFamily: "HelveticaNeue", color: "white", marginLeft: "10px" }}>
+                                {imageLoaded ? "Image file uploaded successfully" : "Upload your background image"}
+                            </p>
                         </AccordionSummary>
-                        <AccordionDetails style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                        <AccordionDetails style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                             <InputFileUpload
                                 handleFunc={handleImageFile}
                                 media={'image'}
@@ -259,11 +264,15 @@ const VideoMakerLogic: React.FC = () => {
                         </AccordionDetails>
                     </Accordion>
 
-
+                    {/* Button to create video */}
                     {audioLoaded && imageLoaded && (
-                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
-                            <CustomizedButton clickFunc={createVideo} />
-                        </div>
+                        
+                            
+                                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                                    <CustomizedButton clickFunc={createVideo} />
+                                </div>
+                        
+                        
                     )}
                 </div>
             ) : (
@@ -274,5 +283,4 @@ const VideoMakerLogic: React.FC = () => {
         </div>
     );
 }
-
 export default VideoMakerLogic;

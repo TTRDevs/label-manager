@@ -3,6 +3,11 @@ import Button from '@mui/material/Button';
 import { orange } from '@mui/material/colors';
 
 const ColorButton = styled(Button)(() => ({
+   width: "225px",
+   height: "5vh",
+   textWrap: "nowrap",
+   maxWidth: "40%",
+   maxHeight: "5vh",
    flexDirection: 'column',
    color: "white",
    backgroundColor: orange[300],
