@@ -10,7 +10,7 @@ const MetabaseEmbedding = () => {
     const dispatch = useAppDispatch();
     const iframeUrl = useAppSelector((state) => state.metabase.iframeUrl);
     const isDashboardOn = useAppSelector((state) => state.metabase.isDashboardOn);
-    const isLoading = useAppSelector((state) => state.page.isLoading);
+    
     
     useEffect(() => {
         // Assume MetabaseEmbedding fetches some data or has some initialization that takes time
