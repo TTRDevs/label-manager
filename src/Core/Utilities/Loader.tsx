@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material"
+import { CircularProgress } from "@mui/material";
 
 export default function Loader() {
   return (
@@ -7,10 +7,10 @@ export default function Loader() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-       // takes full viewport height
+      height: '100vh', // takes full viewport height
     }}>
-      <CircularProgress />
+      <CircularProgress sx={{ color: 'orange' }} />
       <p>Loading...</p>
     </div>
-  )
+  );
 }

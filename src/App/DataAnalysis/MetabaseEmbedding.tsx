@@ -1,9 +1,9 @@
-// MetabaseEmbedding.tsx
 import { useEffect, useCallback } from 'react';
 import './MetabaseEmbedding.css';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from './../../Core/Redux/hooks';
 import { setIframeUrl, setIsDashboardOn } from './../../Core/Redux/metabaseSlice';
+import Loader from "./../../Core/Utilities/Loader"
 
 const MetabaseEmbedding = () => {
     const dispatch = useAppDispatch();
@@ -11,11 +11,12 @@ const MetabaseEmbedding = () => {
     const isDashboardOn = useAppSelector((state) => state.metabase.isDashboardOn);
 
     const fetchMetabaseDashboardURL = useCallback((retries = 3, interval = 3000) => {
+        dispatch(setIsDashboardOn(false)); // Ensure loading state is active before fetching
         const makeRequest = () => {
             axios.get('https://server.recordlabelmanager.com/api/metabase')
                 .then(response => {
                     dispatch(setIframeUrl(response.data.iframeUrl));
-                    dispatch(setIsDashboardOn(true));
+                    dispatch(setIsDashboardOn(true)); // Dashboard is now on, loading is done
                 })
                 .catch(error => {
                     console.error('Error fetching Metabase Dashboard URL from Server', error);
@@ -24,6 +25,7 @@ const MetabaseEmbedding = () => {
                             fetchMetabaseDashboardURL(retries - 1, interval);
                         }, interval);
                     }
+                    // Consider setting isDashboardOn to false or dispatching another action on final failure
                 });
         };
         makeRequest();
@@ -34,7 +36,7 @@ const MetabaseEmbedding = () => {
     }, [fetchMetabaseDashboardURL]);
 
     return (
-        <div className="metabase-embedding-container">
+        <div className="metabase-embedding-container" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {isDashboardOn ? (
                 <iframe
                     src={iframeUrl}
@@ -44,7 +46,7 @@ const MetabaseEmbedding = () => {
                     allowTransparency
                 ></iframe>
             ) : (
-                <p>Loading dashboard...</p>
+                <Loader />
             )}
         </div>
     );
