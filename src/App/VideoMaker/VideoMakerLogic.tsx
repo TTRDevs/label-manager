@@ -15,7 +15,10 @@ import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
 import CircularLoader from "../../Core/Utilities/CircularLoader";
 import './VideoMaker.css';
-
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const VideoMakerLogic: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -212,24 +215,48 @@ const VideoMakerLogic: React.FC = () => {
             {videoLoading && <CircularLoader />}
             {videoNotStarted ? (
                 <div className="settings">
-                    <div style={{ display: 'flex', gap: '80px', alignItems: 'center', justifyContent: 'center' }}>
-                        <InputFileUpload
-                            handleFunc={handleAudioFile}
-                            media={'audio'}
-                            style={{
-                                backgroundColor: audioLoaded ? 'green' : 'orange',
-                                color: 'white'
-                            }}
-                        />
-                        <InputFileUpload
-                            handleFunc={handleImageFile}
-                            media={'image'}
-                            style={{
-                                backgroundColor: imageLoaded ? 'green' : 'orange',
-                                color: 'white'
-                            }}
-                        />
-                    </div>
+                    {/* Accordion for Audio File Upload */}
+                    <Accordion sx={{ backgroundColor: 'orange' }}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <p>Audio File</p>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <InputFileUpload
+                                handleFunc={handleAudioFile}
+                                media={'audio'}
+                                style={{
+                                    backgroundColor: audioLoaded ? 'green' : 'orange',
+                                    color: 'white'
+                                }}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion sx={{ backgroundColor: 'orange' }}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2a-content"
+                            id="panel2a-header"
+                        >
+                            <p>Image File</p>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <InputFileUpload
+                                handleFunc={handleImageFile}
+                                media={'image'}
+                                style={{
+                                    backgroundColor: imageLoaded ? 'green' : 'orange',
+                                    color: 'white'
+                                }}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+
+
                     {audioLoaded && imageLoaded && (
                         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                             <CustomizedButton clickFunc={createVideo} />
@@ -240,10 +267,9 @@ const VideoMakerLogic: React.FC = () => {
                 <div>
                     <VideoOutput src={videoRef} clickFunc1={handleDownloadVideo} clickFunc2={handleCreateAnother} />
                 </div>
-            )
-            }
-        </div >
-    )
+            )}
+        </div>
+    );
 }
 
 export default VideoMakerLogic;
