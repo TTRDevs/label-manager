@@ -216,41 +216,44 @@ const VideoMakerLogic: React.FC = () => {
             {videoNotStarted ? (
                 <div className="settings">
                     {/* Accordion for Audio File Upload */}
-                    <Accordion sx={{ backgroundColor: 'orange' }}>
+                    <Accordion sx={{ backgroundColor: 'rgb(112 154 189)', marginBottom: "20px" }}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon style={{color: "white"}}/>}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <p>Audio File</p>
+                            <p style={{color: "white", marginLeft: "10px"}}>Upload your audio file</p>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
                             <InputFileUpload
                                 handleFunc={handleAudioFile}
                                 media={'audio'}
                                 style={{
                                     backgroundColor: audioLoaded ? 'green' : 'orange',
-                                    color: 'white'
+                                    color: 'white',
+                                    borderRadius: "10px",
+                                    marginBottom: "10px"
                                 }}
                             />
                         </AccordionDetails>
                     </Accordion>
 
-                    <Accordion sx={{ backgroundColor: 'orange' }}>
+                    <Accordion sx={{ backgroundColor: 'rgb(112 154 189)', marginBottom: "20px" }}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon style={{color: "white"}}/>}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <p>Image File</p>
+                            <p style={{fontFamily: "HelveticaNeue", color: "white", marginLeft: "10px"}}>Upload your background image</p>
                         </AccordionSummary>
-                        <AccordionDetails>
+                        <AccordionDetails style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
                             <InputFileUpload
                                 handleFunc={handleImageFile}
                                 media={'image'}
                                 style={{
                                     backgroundColor: imageLoaded ? 'green' : 'orange',
-                                    color: 'white'
+                                    color: 'white',
+                                    borderRadius: "10px"
                                 }}
                             />
                         </AccordionDetails>
