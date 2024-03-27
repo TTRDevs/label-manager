@@ -9,3 +9,13 @@
     font-size: 1em;
     color: Black;
 }
+
+.loader {
+    margin-top: 80px;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Set direction to column */
+    justify-content: center;
+    align-items: center;
+    width: 100vw; /* Set width to 100% for responsiveness */
+}

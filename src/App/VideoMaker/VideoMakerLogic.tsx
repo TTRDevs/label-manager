@@ -13,7 +13,7 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import VideoOutput from "./VideoOutput";
 import InputFileUpload from "./InputFileUpload";
 import CustomizedButton from "./CustomizedButton";
-import CircularLoader from "../../Core/Utilities/CircularLoader";
+import LinearLoader from "../../Core/Utilities/LinearLoader";
 import './VideoMaker.css';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -212,7 +212,6 @@ const VideoMakerLogic: React.FC = () => {
 
     return loaded && (
         <div className="VideoMkr">
-            {videoLoading && <CircularLoader />}
             {videoNotStarted ? (
                 <div className="settings">
                     {/* Accordion for Audio File Upload */}
@@ -247,7 +246,7 @@ const VideoMakerLogic: React.FC = () => {
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <p style={{ fontFamily: "HelveticaNeue", color: "white", marginLeft: "10px" }}>
+                            <p style={{ color: "white", marginLeft: "10px" }}>
                                 {imageLoaded ? "Image file uploaded successfully" : "Upload your background image"}
                             </p>
                         </AccordionSummary>
@@ -258,29 +257,35 @@ const VideoMakerLogic: React.FC = () => {
                                 style={{
                                     backgroundColor: imageLoaded ? 'green' : 'orange',
                                     color: 'white',
-                                    borderRadius: "10px"
+                                    borderRadius: "10px",
+                                    marginBottom: "10px"
                                 }}
                             />
                         </AccordionDetails>
                     </Accordion>
-
                     {/* Button to create video */}
                     {audioLoaded && imageLoaded && (
-                        
-                            
-                                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
-                                    <CustomizedButton clickFunc={createVideo} />
-                                </div>
-                        
-                        
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                            <CustomizedButton clickFunc={createVideo} />
+                        </div>
                     )}
                 </div>
             ) : (
-                <div>
-                    <VideoOutput src={videoRef} clickFunc1={handleDownloadVideo} clickFunc2={handleCreateAnother} />
+                <div style={{ position: "relative" }}>
+                    <VideoOutput src={videoRef} clickFunc1={handleDownloadVideo} clickFunc2={handleCreateAnother}/>
+                    <div>
+                        {videoLoading && (
+                            <div className="loader">
+                                <LinearLoader />
+                                <p style={{ color: "darkgrey", backgroundColor: "white", fontSize: "1.5em", padding: "10px", borderRadius: "100px" }}>Loading Video</p>
+                                {/* <p className="loadingText">Loading Video...</p> Add this line with a class */}
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </div>
     );
-}
+};
+
 export default VideoMakerLogic;
