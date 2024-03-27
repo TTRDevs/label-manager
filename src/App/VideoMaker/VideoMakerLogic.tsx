@@ -271,14 +271,13 @@ const VideoMakerLogic: React.FC = () => {
                     )}
                 </div>
             ) : (
-                <div style={{ position: "relative" }}>
+                <div style={{position: "relative"}}>
                     <VideoOutput src={videoRef} clickFunc1={handleDownloadVideo} clickFunc2={handleCreateAnother}/>
                     <div>
                         {videoLoading && (
                             <div className="loader">
                                 <LinearLoader />
-                                <p style={{ color: "darkgrey", backgroundColor: "white", fontSize: "1.5em", padding: "10px", borderRadius: "100px" }}>Loading Video</p>
-                                {/* <p className="loadingText">Loading Video...</p> Add this line with a class */}
+                                <p className="loadingText">Creating Video</p>
                             </div>
                         )}
                     </div>

@@ -17,3 +17,31 @@
 .settings {
     width: 100%;
 }
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.loadingText {
+    display: flex;
+    position: relative;
+    margin-top: 100px;
+    color: darkgrey;
+    font-size: 1.5em;
+    border-radius: 100px;
+}
+
+.MuiLinearProgress-bar1Indeterminate {
+    position: relative;
+    width: 50%;
+    position: relative;
+    margin-top: 40px;
+}
