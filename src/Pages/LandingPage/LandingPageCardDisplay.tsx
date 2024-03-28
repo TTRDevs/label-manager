@@ -12,14 +12,17 @@ export default function LandingPageCardDisplay() {
 
     return (
         <Box sx={{ 
-            display: 'grid', 
-            gridTemplateColumns: matches ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+            display: 'grid',
+            position: 'relative', // Add a relative position to ensure the grid doesn't overflow the container
+            gridTemplateColumns: matches ? 'repeat(1, 1fr)' : 'repeat(4, 1fr)',
             gap: 2,
             justifyContent: 'center',
             alignItems: 'start',
             maxWidth: '1200px',
-            margin: '0 auto',
+            minWidth: '400px',
+            margin: '1rem auto', // Add a top margin to ensure cards don't go under the header
             gridAutoFlow: 'row dense',
+            padding: '2rem', // Add padding to maintain space around the edges
         }}>
             {moduleNames.map((name) => (
                 <LandingPageIndividualCard key={name} title={name} />

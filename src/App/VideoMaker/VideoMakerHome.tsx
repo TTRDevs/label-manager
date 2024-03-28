@@ -17,7 +17,7 @@ export default function VideoMakerHome() {
     }, []);
 
     return (
-        <Box sx={{ height: "calc(100vh - 120px)", display: "flex", flexDirection: "column", justifyContent: "left", width: "calc(100vw - 60px)", marginTop: "100px", marginBottom: "20px", bottom: "0px", position: 'relative' }}>
+        <Box sx={{ height: "calc(100vh - 120px)", display: "flex", flexDirection: "column", justifyContent: "left", width: "calc(100vw - 60px)", marginTop: "20px", marginBottom: "20px", bottom: "0px", position: 'relative' }}>
             {!isLoaded ? (
                 <div className="loadingContainer">
                     <LinearLoader />

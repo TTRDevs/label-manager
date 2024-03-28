@@ -25,24 +25,32 @@ export default function LandingPageIndividualCard({ title }: CardProp) {
         }
     }
 
-        return (
-            <Card sx={{ maxWidth: 300, height: '100%', maxHeight: 300, minWidth: 150, display: 'flex', flexDirection: 'column', opacity: moduleData.available ? 1 : 0.4 }}>
-                <CardActionArea disabled={!moduleData.available} onClick={handleNavigation} sx={{ flex: 1 }}>
-                    <CardMedia
-                        component="img"
-                        image={moduleData.image}
-                        alt={moduleData.title}
-                        sx={{ height: 140 }}
-                    />
-                    <CardContent sx={{ flexGrow: 1, height: '100%' }}>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {moduleData.title}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {moduleData.text}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        );
-    }
+    return (
+        <Card sx={{
+            maxWidth: 300,
+            height: '100%',
+            minWidth: 200,
+            display: 'flex',
+            flexDirection: 'column',
+            opacity: moduleData.available ? 1 : 0.4,
+            margin: 'auto'
+        }}>
+            <CardActionArea disabled={!moduleData.available} onClick={handleNavigation} sx={{ flex: 1 }}>
+                <CardMedia
+                    component="img"
+                    image={moduleData.image}
+                    alt={moduleData.title}
+                    sx={{ height: 140 }}
+                />
+                <CardContent sx={{ flexGrow: 1, height: '100%' }}>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {moduleData.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {moduleData.text}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
+    );
+}

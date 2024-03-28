@@ -24,7 +24,8 @@ export default function LandingPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100vh',
+            position: 'relative',
+            height: '100%',
         }}>
             {isLoading ? <LinearLoader /> : <LandingPageCardDisplay />}
         </div>
