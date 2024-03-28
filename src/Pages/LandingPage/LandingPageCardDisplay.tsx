@@ -1,4 +1,3 @@
-import React from 'react';
 import LandingPageIndividualCard from "./LandingPageIndividualCard";
 import Box from '@mui/material/Box';
 import moduleCardData from './modulesCardData';

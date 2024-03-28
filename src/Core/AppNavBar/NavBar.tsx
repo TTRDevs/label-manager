@@ -6,8 +6,8 @@ import { Link as RouterLink } from 'react-router-dom';
 export default function NavBar() {
 
   return (
-    <AppBar position="relative" sx={{ width: "100%", backgroundColor: "#ec991d", height: '64px' }}>
-      <Toolbar>
+    <AppBar position="relative" sx={{ width: "100%", backgroundColor: "#ec991d" }}>
+      <Toolbar style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Typography
           variant="h6"
           sx={{ flexGrow: 1, color: 'white', textDecoration: 'none' }}
